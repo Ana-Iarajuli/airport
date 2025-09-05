@@ -29,7 +29,9 @@ public class Booking {
             System.out.println("Seat is occupied.");
             return null;
         }
-        Ticket tkt = new Ticket(passenger, flight, seat, seat.getPrice());
+        BigDecimal price = seat.getPrice();
+        String tktnumber = "TKT-" + (bookings + 1);
+        Ticket tkt = new Ticket(tktnumber, passenger, flight, seat, price);
         seat.setOccupied(true);
         bookings++;
 
