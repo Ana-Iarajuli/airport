@@ -3,11 +3,11 @@ package core;
 public class Airport {
 
     private String airportName;
+    private Terminal[] terminals;
 
     public Airport(String airportName) {
         this.airportName = airportName;
     }
-    private Terminal[] terminals;
 
     public String getAirportName() {
         return airportName;

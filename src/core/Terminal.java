@@ -2,7 +2,7 @@ package core;
 
 public class Terminal extends Facility {
 
-    public int terminalNumber;
+    private Integer terminalNumber;
     private Gate[] gates;
 
     public Terminal(String name, int capacity, int terminalNumber) {
@@ -10,11 +10,11 @@ public class Terminal extends Facility {
         this.terminalNumber = terminalNumber;
     }
 
-    public int getTerminalNumber() {
+    public Integer getTerminalNumber() {
         return terminalNumber;
     }
 
-    public void setTerminalNumber(int terminalNumber) {
+    public void setTerminalNumber(Integer terminalNumber) {
         this.terminalNumber = terminalNumber;
     }
 

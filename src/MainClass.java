@@ -46,7 +46,6 @@ public class MainClass {
         Gate gate2 = new Gate(13);
         Gate gate3 = new Gate(3);
 
-        Airline airline = new Airline("Fly with Yoda");
 
         Seat seat1 = new Seat("23B", true);
         seat1.setPrice(new BigDecimal("123.4"));
