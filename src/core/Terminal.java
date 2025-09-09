@@ -1,11 +1,12 @@
 package core;
 
-public class Terminal {
+public class Terminal extends Facility {
 
-    private int terminalNumber;
+    public int terminalNumber;
     private Gate[] gates;
 
-    public Terminal(int terminalNumber) {
+    public Terminal(String name, int capacity, int terminalNumber) {
+        super(name, capacity);
         this.terminalNumber = terminalNumber;
     }
 

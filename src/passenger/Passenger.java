@@ -1,19 +1,26 @@
 package passenger;
 
-public class Passenger {
+import core.Person;
+
+import java.time.LocalDate;
+
+public class Passenger extends Person {
 
     private int passengerId;
-    private String passengerName;
-    private String passengerSurname;
-    private String passengerEmail;
+    private boolean isPremiumMember;
 
-    public Passenger(int passengerId, String passengerName, String passengerSurname,
-                     String passengerEmail) {
+
+    public Passenger(int passengerId, String firstName, String lastName,
+                     String email, String gender, LocalDate birthDate, boolean isPremiumMember) {
+        super(firstName, lastName, email, gender, birthDate);
         this.passengerId = passengerId;
-        this.passengerName= passengerName;
-        this.passengerSurname = passengerSurname;
-        this.passengerEmail = passengerEmail;
+        this.isPremiumMember = isPremiumMember;
     }
+
+    public String personRole() {
+        return isPremiumMember ? "Gets a discount" : "Regular price";
+    }
+    public boolean hasDiscount() { return isPremiumMember; }
 
     public static class Passport {
         private String passportNumber;
@@ -26,16 +33,4 @@ public class Passenger {
     public int getPassengerId() {return passengerId;}
 
     public void setPassengerId(int passengerId) {this.passengerId = passengerId;}
-
-    public String getPassengerName() {return passengerName;}
-
-    public void setPassengerName(String passengerName) {this.passengerName = passengerName;}
-
-    public String getPassengerSurname() {return passengerSurname;}
-
-    public void setPassengerSurname(String passengerSurname) {this.passengerSurname = passengerSurname;}
-
-    public String getPassengerEmail() {return passengerEmail;}
-
-    public void setPassengerEmail(String passengerEmail) {this.passengerEmail = passengerEmail;}
 }

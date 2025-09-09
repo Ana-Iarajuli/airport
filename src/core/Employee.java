@@ -1,23 +1,31 @@
 package core;
 
-public class Employee {
+import java.time.LocalDate;
 
-    private String employeeName;
-    private String employeeSurname;
+public class Employee extends Person {
 
-    public String getEmployeeName() {
-        return employeeName;
+    private String position;
+
+    public Employee(String firstName, String lastName, String email, String gender, LocalDate birthDate, String position) {
+        super(firstName, lastName, email, gender, birthDate);
+        this.position = position;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    @Override
+    public String personRole() {
+        return position;
     }
 
-    public String getEmployeeSurname() {
-        return employeeSurname;
+    @Override
+    public boolean hasDiscount() {
+        return position.contains("manager");
     }
 
-    public void setEmployeeSurname(String employeeSurname) {
-        this.employeeSurname = employeeSurname;
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
