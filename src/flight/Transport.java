@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public abstract class Transport {
 
-    protected String manufacturer;
-    protected int capacity;
+    private String manufacturer;
+    private int capacity;
 
     public Transport(String manufacturer, int capacity) {
         this.manufacturer = manufacturer;
@@ -37,12 +37,16 @@ public abstract class Transport {
         return getTransportType() + ", manufacturer: " + manufacturer + ", capacity: " + capacity;
     }
 
+    protected boolean sameManufacturer(Transport other) {
+        return other != null && Objects.equals(other.getManufacturer(), manufacturer);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Person)) return false;
+        if (!(obj instanceof Transport)) return false;
         Transport transport = (Transport) obj;
-        return transport.getManufacturer().equals(manufacturer);
+        return sameManufacturer(transport) && transport.getCapacity() == capacity;
     }
 
     @Override

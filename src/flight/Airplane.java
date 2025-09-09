@@ -6,7 +6,6 @@ public class Airplane extends Transport {
 
     public Airplane(String manufacturer, int capacity) {
         super(manufacturer, capacity);
-        this.model = model;
         this.seats = new Seat[100];
     }
 
@@ -29,5 +28,9 @@ public class Airplane extends Transport {
 
     public void setSeats(Seat[] seats) {
         this.seats = seats;
+    }
+
+    protected String airplaneInfo() {
+        return getTransportType() + ": model=" + model + ", seats=" + (seats == null ? 0 : seats.length);
     }
 }

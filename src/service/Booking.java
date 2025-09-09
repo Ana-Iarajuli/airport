@@ -47,7 +47,7 @@ public class Booking {
         return tkt;
     }
 
-    private BigDecimal calculateDiscount(Person person, Seat seat) {
+    protected BigDecimal calculateDiscount(Person person, Seat seat) {
         BigDecimal price = seat.getPrice();
         if (person.hasDiscount()) {
             BigDecimal discount = price.multiply(MEMBER_DISCOUNT);
@@ -66,7 +66,7 @@ public class Booking {
         }
     }
 
-    private void confirmation(Passenger passenger, Ticket tkt) {
+    protected void confirmation(Passenger passenger, Ticket tkt) {
         System.out.println("Booking successful!");
         System.out.println("Ticket details sent on " + passenger.getEmail() +
                 " with tkt number: " + tkt.getTktNumber());

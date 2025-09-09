@@ -5,11 +5,11 @@ import java.util.Objects;
 
 public abstract class Person {
 
-    protected String firstName;
-    protected String lastName;
-    protected String email;
-    protected String gender;
-    protected LocalDate birthDate;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String gender;
+    private LocalDate birthDate;
 
     public Person(String firstName, String lastName, String email, String gender, LocalDate birthDate) {
         this.firstName = firstName;
@@ -62,11 +62,15 @@ public abstract class Person {
         this.birthDate = birthDate;
     }
 
+    protected String fullName() {
+        return firstName + " " + lastName;
+    }
+
 
     @Override
     public String toString() {
         return "Person info:" +
-                "name - " + firstName + " " + lastName +
+                "name - " + fullName() +
                 ", email - " + email +
                 ", role - " + personRole();
     }

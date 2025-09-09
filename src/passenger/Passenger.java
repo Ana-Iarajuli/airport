@@ -26,7 +26,7 @@ public class Passenger extends Person {
         private String passportNumber;
     }
 
-    public void printPassportInfo(Passport passport) {
+    protected void printPassportInfo(Passport passport) {
         System.out.println("Passport number is: " + passport.passportNumber);
     }
 
