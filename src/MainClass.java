@@ -33,11 +33,17 @@ public class MainClass {
 
         Transport[] transports = {airplane1, airplane2, bus};
         for (Transport transport : transports) {
-            System.out.println("  • " + transport.toString());
+            System.out.println(transport.toString() + ", ");
         }
 
         Airport airport = new Airport("Tatooine airport");
         System.out.println(airport.getAirportName());
+
+        airport.setTransports(transports);
+        System.out.println("Airport transports:");
+        for (Transport t : airport.getTransports()) {
+            System.out.println("  • " + t);
+        }
 
         Terminal t1 = new Terminal("T1", 111, 13);
         airport.setTerminals(new Terminal[]{t1});
@@ -59,7 +65,7 @@ public class MainClass {
         Flight flight = new Flight(1, "Death Star",
                 LocalDateTime.of(2024, 12, 16, 14, 0),
                 LocalDateTime.of(2024, 12, 16, 20, 30)
-                );
+        );
 
         Booking bookingService = new Booking();
 

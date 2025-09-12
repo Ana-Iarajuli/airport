@@ -1,9 +1,12 @@
 package core;
 
+import flight.Transport;
+
 public class Airport {
 
     private String airportName;
     private Terminal[] terminals;
+    private Transport[] transports;
 
     public Airport(String airportName) {
         this.airportName = airportName;
@@ -23,5 +26,13 @@ public class Airport {
 
     public void setTerminals(Terminal[] terminals) {
         this.terminals = terminals;
+    }
+
+    public Transport[] getTransports() {
+        return transports;
+    }
+
+    public void setTransports(Transport[] transports) {
+        this.transports = transports;
     }
 }
