@@ -8,7 +8,7 @@ import passenger.Ticket;
 
 import java.math.BigDecimal;
 
-public class Booking {
+public class Booking implements CheckInService, BoardingService, FlightManagementService {
 
     private static int bookings = 0;
     private static final BigDecimal MEMBER_DISCOUNT = new BigDecimal("0.25");
@@ -45,6 +45,24 @@ public class Booking {
         confirmation(passenger, tkt);
 
         return tkt;
+    }
+
+    @Override
+    public boolean checkIn(Ticket ticket) {
+        System.out.println("Checked in: " + ticket.getTktNumber());
+        return true;
+    }
+
+    @Override
+    public void boardPassenger(Ticket ticket) {
+        System.out.println("Boarding passenger with ticket: " + ticket.getTktNumber());
+    }
+
+    @Override
+    public void delayFlight(Flight flight, int minutes) {
+        System.out.println("Delaying flight " + flight.getFlightId() + " by " + minutes + " minutes.");
+        flight.setDeparture(flight.getDeparture().plusMinutes(minutes));
+        flight.setArrival(flight.getArrival().plusMinutes(minutes));
     }
 
     protected BigDecimal calculateDiscount(Person person, Seat seat) {

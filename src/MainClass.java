@@ -68,6 +68,10 @@ public class MainClass {
         );
 
         Booking bookingService = new Booking();
+        
+        airport.setCheckInService(bookingService);
+        airport.setBoardingService(bookingService);
+        airport.setFlightManagementService(bookingService);
 
         Ticket ticket1 = bookingService.BookTkt(memberPassenger, flight, seat2);
         if (ticket1 != null) {
@@ -81,6 +85,14 @@ public class MainClass {
 
 
         System.out.println("Total bookings: " + Booking.getBookings());
+
+        airport.getCheckInService().checkIn(ticket1);
+        airport.getBoardingService().boardPassenger(ticket1);
+        airport.getFlightManagementService().delayFlight(flight, 15);
+
+        ServiceDesk.announce("Boarding begins at Gate 13");
+        ServiceDesk desk = new ServiceDesk("Service Desk-01");
+        desk.assistCheckIn(bookingService, ticket1);
 
     }
 }
