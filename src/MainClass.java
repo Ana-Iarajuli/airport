@@ -38,6 +38,12 @@ public class MainClass {
 
         Airport airport = new Airport("Tatooine airport");
         System.out.println(airport.getAirportName());
+        
+        airport.setTransports(transports);
+        System.out.println("Airport transports:");
+        for (Transport t : airport.getTransports()) {
+            System.out.println("  • " + t);
+        }
 
         airport.setTransports(transports);
         System.out.println("Airport transports:");
