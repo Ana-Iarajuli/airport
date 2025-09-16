@@ -5,6 +5,10 @@ import flight.Flight;
 import flight.Seat;
 import passenger.Passenger;
 import passenger.Ticket;
+import exceptions.InvalidTicketException;
+import exceptions.SeatOccupiedRuntimeException;
+import exceptions.UnauthorizedOperationException;
+import exceptions.InvalidFlightOperationException;
 
 import java.math.BigDecimal;
 
@@ -17,7 +21,7 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     private Person[] customers;
 
     static {
-        System.out.println("service.Booking Service requested");
+        System.out.println("Booking Service is requested");
     }
 
     public static int getBookings() {
@@ -32,8 +36,7 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
 
     public Ticket BookTkt(Passenger passenger, Flight flight, Seat seat) {
         if (seat.isOccupied()) {
-            System.out.println("Seat is occupied.");
-            return null;
+            throw new SeatOccupiedRuntimeException("Seat " + seat.getSeatNumber() + " is already occupied");
         }
         BigDecimal finalPrice = calculateDiscount(passenger, seat);
         String tktnumber = "TKT-" + (bookings + 1);
@@ -48,7 +51,10 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     }
 
     @Override
-    public boolean checkIn(Ticket ticket) {
+    public boolean checkIn(Ticket ticket) throws InvalidTicketException {
+        if (ticket == null) {
+            throw new InvalidTicketException("Ticket can't be null");
+        }
         System.out.println("Checked in: " + ticket.getTktNumber());
         return true;
     }
@@ -60,7 +66,10 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
 
     @Override
     public void delayFlight(Flight flight, int minutes) {
-        System.out.println("Delaying flight " + flight.getFlightId() + " by " + minutes + " minutes.");
+        if (minutes < 0) {
+            throw new InvalidFlightOperationException("Flightt delay minutes can't be negative");
+        }
+        System.out.println("Flight " + flight.getFlightId() + " is delayed by " + minutes + " minutes");
         flight.setDeparture(flight.getDeparture().plusMinutes(minutes));
         flight.setArrival(flight.getArrival().plusMinutes(minutes));
     }

@@ -2,6 +2,7 @@ import core.*;
 import flight.*;
 import passenger.*;
 import service.*;
+import exceptions.InvalidTicketException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -92,7 +93,11 @@ public class MainClass {
 
         System.out.println("Total bookings: " + Booking.getBookings());
 
-        airport.getCheckInService().checkIn(ticket1);
+        try (ServiceSession session = new ServiceSession()) {
+            airport.getCheckInService().checkIn(ticket1);
+        } catch (InvalidTicketException e) {
+            System.out.println("Check in failed: " + e.getMessage());
+        }
         airport.getBoardingService().boardPassenger(ticket1);
         airport.getFlightManagementService().delayFlight(flight, 15);
 
