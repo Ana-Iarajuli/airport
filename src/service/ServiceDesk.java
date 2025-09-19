@@ -1,6 +1,7 @@
 package service;
 
 import passenger.Ticket;
+import exceptions.InvalidTicketException;
 
 public final class ServiceDesk {
 
@@ -25,8 +26,12 @@ public final class ServiceDesk {
     }
 
     public void assistCheckIn(CheckInService checkInService, Ticket ticket) {
-        boolean ok = checkInService.checkIn(ticket);
-        System.out.println("Desk: " + deskId + " check-in result: " + ok);
+        try {
+            boolean ok = checkInService.checkIn(ticket);
+            System.out.println("Desk ID: " + deskId + " check in result: " + ok);
+        } catch (InvalidTicketException e) {
+            System.out.println("Desk ID: " + deskId + " check in failed: " + e.getMessage());
+        }
     }
 }
 

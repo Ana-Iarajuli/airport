@@ -3,6 +3,7 @@ import flight.*;
 import passenger.*;
 import service.*;
 import exceptions.InvalidTicketException;
+import exceptions.SeatOccupiedRuntimeException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -87,11 +88,18 @@ public class MainClass {
                     ", price: " + ticket1.getTktPrice());
         }
 
-        Ticket ticket2 = bookingService.BookTkt(regularPassenger, flight, seat2);
-        System.out.println("booking for occupied seat: " + ticket2);
-
+        Ticket ticket2 = null;
+        try {
+            ticket2 = bookingService.BookTkt(regularPassenger, flight, seat2);
+        } catch (SeatOccupiedRuntimeException e) {
+            System.out.println("Error booking seat: " + e.getMessage());
+        } finally {
+            System.out.println("Finished booking for seat " + seat2.getSeatNumber());
+        }
+//        System.out.println("booking for occupied seat: " + ticket2);
 
         System.out.println("Total bookings: " + Booking.getBookings());
+        System.out.println("-----------------------");
 
         try (ServiceSession session = new ServiceSession()) {
             airport.getCheckInService().checkIn(ticket1);
@@ -102,7 +110,7 @@ public class MainClass {
         airport.getFlightManagementService().delayFlight(flight, 15);
 
         ServiceDesk.announce("Boarding begins at Gate 13");
-        ServiceDesk desk = new ServiceDesk("Service Desk-01");
+        ServiceDesk desk = new ServiceDesk("Service Desk-01.");
         desk.assistCheckIn(bookingService, ticket1);
 
     }
