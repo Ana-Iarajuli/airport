@@ -55,6 +55,7 @@ public class MainClass {
 
         Terminal t1 = new Terminal("T1", 111, 13);
         airport.setTerminals(new Terminal[]{t1});
+        airport.getTerminals();
 
         Gate gate1 = new Gate(19);
         Gate gate2 = new Gate(13);

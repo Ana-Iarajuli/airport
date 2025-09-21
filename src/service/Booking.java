@@ -9,6 +9,7 @@ import exceptions.InvalidTicketException;
 import exceptions.SeatOccupiedRuntimeException;
 import exceptions.UnauthorizedOperationException;
 import exceptions.InvalidFlightOperationException;
+import utils.*;
 
 import java.math.BigDecimal;
 
@@ -20,6 +21,10 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
 
     private Person[] customers;
 
+    // Generic classes usage
+    private Registry<Ticket> ticketRegistry;
+    private ServiceManager<Passenger> passengerService;
+
     static {
         System.out.println("Booking Service is requested");
     }
@@ -27,11 +32,15 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     public static int getBookings() {
         return bookings;
     }
+
     public Booking() {
+        // Initialize generic classes
+        this.ticketRegistry = new Registry<>();
+        this.passengerService = new ServiceManager<>();
+
         this.isOnline = true;
         this.customers = new Person[13];
     }
-
 
 
     public Ticket BookTkt(Passenger passenger, Flight flight, Seat seat) {
@@ -39,11 +48,21 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
             throw new SeatOccupiedRuntimeException("Seat " + seat.getSeatNumber() + " is already occupied");
         }
         BigDecimal finalPrice = calculateDiscount(passenger, seat);
+
         String tktnumber = "TKT-" + (bookings + 1);
 
         Ticket tkt = new Ticket(tktnumber, passenger, flight, seat, finalPrice);
         seat.setOccupied(true);
         bookings++;
+
+        ticketRegistry.registerWithKey(tkt.getTktNumber(), tkt);
+
+        if (passenger.hasDiscount()) {
+            passengerService.addToPriority(passenger);
+        } else {
+            passengerService.addToRegular(passenger);
+        }
+        passengerService.addNamedService("last passenger", passenger);
 
         confirmation(passenger, tkt);
 
@@ -117,6 +136,10 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     public void setOnline(boolean online) {
         isOnline = online;
     }
+
+    public Registry<Ticket> getTicketRegistry() { return ticketRegistry; }
+    public ServiceManager<Passenger> getPassengerService() { return passengerService; }
+
 }
 
 
