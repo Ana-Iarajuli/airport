@@ -4,10 +4,12 @@ import core.Maintainable;
 import core.Trackable;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Airplane extends Transport implements Maintainable, Trackable {
     private String model;
-    private Seat[] seats;
+    private List<Seat> seats;
     private LocalDate lastMaintenanceDate;
     private static final String TRACKING = "TrackingID-";
     private static int nextTrackingNum = 1;
@@ -15,7 +17,7 @@ public class Airplane extends Transport implements Maintainable, Trackable {
 
     public Airplane(String manufacturer, int capacity) {
         super(manufacturer, capacity);
-        this.seats = new Seat[100];
+        this.seats = new ArrayList<>();
         this.trackingId = TRACKING + nextTrackingNum++;
     }
 
@@ -32,16 +34,11 @@ public class Airplane extends Transport implements Maintainable, Trackable {
         this.model = model;
     }
 
-    public Seat[] getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Seat[] seats) {
-        this.seats = seats;
-    }
+    public List<Seat> getSeats() { return new ArrayList<>(seats); }
+    public void setSeats(List<Seat> seats) { this.seats = new ArrayList<>(seats); }
 
     protected String airplaneInfo() {
-        return getTransportType() + ": model=" + model + ", seats=" + (seats == null ? 0 : seats.length);
+        return getTransportType() + ": model=" + model + ", seats=" + (seats == null ? 0 : seats.size());
     }
 
     @Override

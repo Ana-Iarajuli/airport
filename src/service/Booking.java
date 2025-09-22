@@ -12,6 +12,8 @@ import exceptions.InvalidFlightOperationException;
 import utils.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking implements CheckInService, BoardingService, FlightManagementService {
 
@@ -19,9 +21,9 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     private static final BigDecimal MEMBER_DISCOUNT = new BigDecimal("0.25");
     private boolean isOnline;
 
-    private Person[] customers;
+    private List<Person> customers;
 
-    // Generic classes usage
+
     private Registry<Ticket> ticketRegistry;
     private ServiceManager<Passenger> passengerService;
 
@@ -34,12 +36,11 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     }
 
     public Booking() {
-        // Initialize generic classes
         this.ticketRegistry = new Registry<>();
         this.passengerService = new ServiceManager<>();
 
         this.isOnline = true;
-        this.customers = new Person[13];
+        this.customers = new ArrayList<>();
     }
 
 
@@ -103,14 +104,7 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
         return price;
     }
 
-    protected void addCustomer(Person person) {
-        for (int i = 0; i < customers.length; i++) {
-            if (customers[i] == null) {
-                customers[i] = person;
-                break;
-            }
-        }
-    }
+    protected void addCustomer(Person person) { this.customers.add(person); }
 
     protected void confirmation(Passenger passenger, Ticket tkt) {
         System.out.println("Booking successful!");
@@ -121,11 +115,9 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     public void displayCustomers() {
         System.out.println("Customers: ");
         for (Person person : customers) {
-            if (person != null) {
-                System.out.println("Customer: " + person.toString());
-                System.out.println("Role is: " + person.personRole());
-                System.out.println("Gets discount: " + person.hasDiscount());
-            }
+            System.out.println("Customer: " + person.toString());
+            System.out.println("Role is: " + person.personRole());
+            System.out.println("Gets discount: " + person.hasDiscount());
         }
     }
 

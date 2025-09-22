@@ -1,9 +1,12 @@
 package core;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Terminal extends Facility {
 
     private Integer terminalNumber;
-    private Gate[] gates;
+    private List<Gate> gates;
 
     public Terminal(String name, int capacity, int terminalNumber) {
         super(name, capacity);
@@ -18,11 +21,6 @@ public class Terminal extends Facility {
         this.terminalNumber = terminalNumber;
     }
 
-    public Gate[] getGates() {
-        return gates;
-    }
-
-    public void setGates(Gate[] gates) {
-        this.gates = gates;
-    }
+    public List<Gate> getGates() { return new ArrayList<>(gates); }
+    public void setGates(List<Gate> gates) { this.gates = new ArrayList<>(gates); }
 }
