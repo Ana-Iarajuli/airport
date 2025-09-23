@@ -5,16 +5,23 @@ import service.CheckInService;
 import service.BoardingService;
 import service.FlightManagementService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Airport {
 
     private String airportName;
-    private Terminal[] terminals;
-    private Transport[] transports;
+    private List<Terminal> terminals;
+    private List<Transport> transports;
     private CheckInService checkInService;
     private BoardingService boardingService; 
-    private FlightManagementService flightManagementService; 
+    private FlightManagementService flightManagementService;
+
+
     public Airport(String airportName) {
         this.airportName = airportName;
+        this.terminals = new ArrayList<>();
+        this.transports = new ArrayList<>();
     }
 
     public String getAirportName() {
@@ -25,21 +32,28 @@ public class Airport {
         this.airportName = airportName;
     }
 
-    public Terminal[] getTerminals() {
-        return terminals;
+    public boolean addTerminal(Terminal terminal) {
+        if (terminal == null) return false;
+        return terminals.add(terminal);
     }
 
-    public void setTerminals(Terminal[] terminals) {
-        this.terminals = terminals;
+    public boolean removeTerminal(Terminal terminal) {
+        return terminals.remove(terminal);
     }
 
-    public Transport[] getTransports() {
-        return transports;
+    public Terminal getTerminal(int index) {
+        if (terminals == null || terminals.isEmpty()) return null;
+        if (index < 0 || index >= terminals.size()) return null;
+        return terminals.get(index);
     }
 
-    public void setTransports(Transport[] transports) {
-        this.transports = transports;
-    }
+    public List<Terminal> getTerminals() { return new ArrayList<>(terminals); }
+    
+    public void setTerminals(List<Terminal> terminals) { this.terminals = new ArrayList<>(terminals); }
+
+    public List<Transport> getTransports() { return new ArrayList<>(transports); }
+
+    public void setTransports(List<Transport> transports) { this.transports = new ArrayList<>(transports); }
 
     public void setCheckInService(CheckInService checkInService) {
         this.checkInService = checkInService;

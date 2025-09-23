@@ -8,6 +8,10 @@ import exceptions.SeatOccupiedRuntimeException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainClass {
 
@@ -23,9 +27,9 @@ public class MainClass {
         Employee pilot = new Employee("Han", "Solo", "han@smugglers.com", "male",
                 LocalDate.of(1942, 7, 13), "Pilot Captain");
 
-        Person[] people = {memberPassenger, regularPassenger, pilot};
+        List<Person> people = Arrays.asList(memberPassenger, regularPassenger, pilot);
         for (Person person : people) {
-            System.out.println("  • " + person.toString());
+            System.out.println("- " + person.toString());
         }
 
         Airplane airplane1 = new Airplane("Galactic Motors", 223);
@@ -33,33 +37,41 @@ public class MainClass {
 
         Bus bus = new Bus("Galactic Motors", 30);
 
-        Transport[] transports = {airplane1, airplane2, bus};
-        for (Transport transport : transports) {
-            System.out.println(transport.toString() + ", ");
-        }
+        List<Transport> transports = Arrays.asList(airplane1, airplane2, bus);
+//        for (Transport transport : transports) {
+//            System.out.println(transport.toString() + ", ");
+//        }
 
+        System.out.println("-------------");
         Airport airport = new Airport("Tatooine airport");
-        System.out.println(airport.getAirportName());
-        
-        airport.setTransports(transports);
-        System.out.println("Airport transports:");
-        for (Transport t : airport.getTransports()) {
-            System.out.println("  • " + t);
-        }
+//        System.out.println(airport.getAirportName());
 
         airport.setTransports(transports);
-        System.out.println("Airport transports:");
         for (Transport t : airport.getTransports()) {
-            System.out.println("  • " + t);
+            System.out.println("- Transport" + t);
         }
 
         Terminal t1 = new Terminal("T1", 111, 13);
-        airport.setTerminals(new Terminal[]{t1});
+        Terminal t2 = new Terminal("T2", 121, 11);
+        airport.setTerminals(Arrays.asList(t1, t2));
 
-        Gate gate1 = new Gate(19);
-        Gate gate2 = new Gate(13);
-        Gate gate3 = new Gate(3);
+//        for (Terminal t : airport.getTerminals()) {
+//            System.out.println("terminal" + t);
+//        }
 
+        Map<Integer, Terminal> terminalMap = new HashMap<>();
+        for (Terminal t : airport.getTerminals()) {
+            terminalMap.put(t.getTerminalNumber(), t);
+        }
+
+        System.out.println("-------------");
+        for (Map.Entry<Integer, Terminal> entry : terminalMap.entrySet()) {
+            System.out.println("- Terminal Number: " + entry.getKey() + " - " + entry.getValue());
+        }
+
+//        Gate gate1 = new Gate(19);
+//        Gate gate2 = new Gate(13);
+//        Gate gate3 = new Gate(3);
 
         Seat seat1 = new Seat("23B", true);
         seat1.setPrice(new BigDecimal("123.4"));
@@ -76,7 +88,7 @@ public class MainClass {
         );
 
         Booking bookingService = new Booking();
-        
+
         airport.setCheckInService(bookingService);
         airport.setBoardingService(bookingService);
         airport.setFlightManagementService(bookingService);

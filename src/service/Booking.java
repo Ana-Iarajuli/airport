@@ -9,8 +9,11 @@ import exceptions.InvalidTicketException;
 import exceptions.SeatOccupiedRuntimeException;
 import exceptions.UnauthorizedOperationException;
 import exceptions.InvalidFlightOperationException;
+import utils.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking implements CheckInService, BoardingService, FlightManagementService {
 
@@ -18,7 +21,11 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     private static final BigDecimal MEMBER_DISCOUNT = new BigDecimal("0.25");
     private boolean isOnline;
 
-    private Person[] customers;
+    private List<Person> customers;
+
+
+    private Registry<Ticket> ticketRegistry;
+    private ServiceManager<Passenger> passengerService;
 
     static {
         System.out.println("Booking Service is requested");
@@ -27,11 +34,14 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     public static int getBookings() {
         return bookings;
     }
-    public Booking() {
-        this.isOnline = true;
-        this.customers = new Person[13];
-    }
 
+    public Booking() {
+        this.ticketRegistry = new Registry<>();
+        this.passengerService = new ServiceManager<>();
+
+        this.isOnline = true;
+        this.customers = new ArrayList<>();
+    }
 
 
     public Ticket BookTkt(Passenger passenger, Flight flight, Seat seat) {
@@ -39,11 +49,21 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
             throw new SeatOccupiedRuntimeException("Seat " + seat.getSeatNumber() + " is already occupied");
         }
         BigDecimal finalPrice = calculateDiscount(passenger, seat);
+
         String tktnumber = "TKT-" + (bookings + 1);
 
         Ticket tkt = new Ticket(tktnumber, passenger, flight, seat, finalPrice);
         seat.setOccupied(true);
         bookings++;
+
+        ticketRegistry.registerWithKey(tkt.getTktNumber(), tkt);
+
+        if (passenger.hasDiscount()) {
+            passengerService.addToPriority(passenger);
+        } else {
+            passengerService.addToRegular(passenger);
+        }
+        passengerService.addNamedService("last passenger", passenger);
 
         confirmation(passenger, tkt);
 
@@ -84,14 +104,7 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
         return price;
     }
 
-    protected void addCustomer(Person person) {
-        for (int i = 0; i < customers.length; i++) {
-            if (customers[i] == null) {
-                customers[i] = person;
-                break;
-            }
-        }
-    }
+    protected void addCustomer(Person person) { this.customers.add(person); }
 
     protected void confirmation(Passenger passenger, Ticket tkt) {
         System.out.println("Booking successful!");
@@ -102,11 +115,9 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     public void displayCustomers() {
         System.out.println("Customers: ");
         for (Person person : customers) {
-            if (person != null) {
-                System.out.println("Customer: " + person.toString());
-                System.out.println("Role is: " + person.personRole());
-                System.out.println("Gets discount: " + person.hasDiscount());
-            }
+            System.out.println("Customer: " + person.toString());
+            System.out.println("Role is: " + person.personRole());
+            System.out.println("Gets discount: " + person.hasDiscount());
         }
     }
 
@@ -117,6 +128,10 @@ public class Booking implements CheckInService, BoardingService, FlightManagemen
     public void setOnline(boolean online) {
         isOnline = online;
     }
+
+    public Registry<Ticket> getTicketRegistry() { return ticketRegistry; }
+    public ServiceManager<Passenger> getPassengerService() { return passengerService; }
+
 }
 
 
