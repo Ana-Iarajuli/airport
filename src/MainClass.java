@@ -1,17 +1,23 @@
 import core.*;
+import enums.SeatClass;
 import flight.*;
 import passenger.*;
 import service.*;
 import exceptions.InvalidTicketException;
 import exceptions.SeatOccupiedRuntimeException;
 
+import utils.AirportFunctional;
+import enums.*;
+import lambda.FareCalculator;
+import lambda.FlightAlert;
+import lambda.SeatSelector;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.function.*;
+
 
 public class MainClass {
 
@@ -125,5 +131,33 @@ public class MainClass {
         ServiceDesk desk = new ServiceDesk("Service Desk-01.");
         desk.assistCheckIn(bookingService, ticket1);
 
+
+        System.out.println("----------H6--------------");
+        List<Seat> seats = new ArrayList<>(Arrays.asList(seat1, seat2, seat3, seat4));
+        Predicate<Seat> freeSeat = s -> !s.isOccupied();
+        Function<Passenger, BigDecimal> discount = p -> p.hasDiscount() ? new java.math.BigDecimal("10.13") : java.math.BigDecimal.ZERO;
+        Supplier<SeatClass> seatClassSupplier = () -> SeatClass.BUSINESS;
+        Consumer<AirportFunctional.PriceBreakdown> logger = b -> System.out.println(b);
+        FareCalculator fareCalculator = (baseFare, passenger, seatClass) -> seatClass.applyTo(baseFare);
+        SeatSelector seatSelector = (list, filter) -> list.stream().filter(filter).findFirst().orElse(null);
+        FlightAlert notifier = (passenger, flight1, msg) -> System.out.println("Notifying " + passenger.getFirstName() + " messgae: " + msg + " " + FlightStatus.SCHEDULED.getDescription());
+
+        AirportFunctional.PriceBreakdown breakdown = AirportFunctional.processBooking(
+                memberPassenger,
+                flight,
+                seats,
+                new java.math.BigDecimal("110.0"),
+
+                freeSeat,
+                discount,
+                logger,
+                seatClassSupplier,
+
+                fareCalculator,
+                notifier,
+                seatSelector
+        );
+
+        System.out.println("Get Final Pric: " + breakdown.getFinalPrice());
     }
 }
