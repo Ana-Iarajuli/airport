@@ -1,4 +1,4 @@
-package core;
+package enums;
 
 public enum SecurityLevel {
 
@@ -18,4 +18,3 @@ public enum SecurityLevel {
 
     public boolean Supervisor() { return priority >= 3; }
 }
-

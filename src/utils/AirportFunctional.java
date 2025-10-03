@@ -1,6 +1,5 @@
 package utils;
 
-import core.SecurityLevel;
 import enums.*;
 import flight.Flight;
 import flight.Seat;
