@@ -59,7 +59,7 @@ public class AirportFunctional {
 
         BigDecimal total = seatPrice.subtract(membershipDiscount);
 
-        String note = " Chosen seat: " + chosen.getSeatNumber() + " class: " + seatClass +
+        String note = "Chosen seat: " + chosen.getSeatNumber() + " class: " + seatClass +
                 " security level: " + SecurityLevel.MEDIUM.policy();
 
         PriceBreakdown breakdown = new PriceBreakdown(baseFare, total, note);

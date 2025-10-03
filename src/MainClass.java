@@ -23,12 +23,17 @@ public class MainClass {
 
     public static void main(String[] args) {
 
-        Passenger memberPassenger = new Passenger(1, "Obi-wan", "Kenobi",
+        PassengerRecord pr1 = new PassengerRecord(1, "Obi-wan", "Kenobi",
                 "thebest@jedi.com", "male", LocalDate.of(1965, 6, 26), true);
-
-        Passenger regularPassenger = new Passenger(2, "Luke", "Skywalker",
+        PassengerRecord pr2 = new PassengerRecord(2, "Luke", "Skywalker",
                 "luke@rebellion.com", "male",
                 LocalDate.of(1977, 5, 25), false);
+
+        Passenger memberPassenger = new Passenger(pr1.id(), pr1.firstName(), pr1.Lastname(),
+                pr1.email(), pr1.gender(), pr1.birthDate(), pr1.premiumMember());
+
+        Passenger regularPassenger = new Passenger(pr2.id(), pr2.firstName(), pr2.Lastname(),
+                pr2.email(), pr2.gender(), pr2.birthDate(), pr2.premiumMember());
 
         Employee pilot = new Employee("Han", "Solo", "han@smugglers.com", "male",
                 LocalDate.of(1942, 7, 13), "Pilot Captain");
