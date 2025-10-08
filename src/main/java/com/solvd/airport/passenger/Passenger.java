@@ -1,11 +1,15 @@
-package main.java.com.solvd.airport.passenger;
+package com.solvd.airport.passenger;
 
-import main.java.com.solvd.airport.core.Person;
+import com.solvd.airport.core.Person;
 
 import java.time.LocalDate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Passenger extends Person {
 
+    private static final Logger logger = LogManager.getLogger(Passenger.class);
+    
     private int passengerId;
     private boolean isPremiumMember;
 
@@ -27,7 +31,7 @@ public class Passenger extends Person {
     }
 
     protected void printPassportInfo(Passport passport) {
-        System.out.println("Passport number is: " + passport.passportNumber);
+        logger.info("Passport number is: " + passport.passportNumber);
     }
 
     public int getPassengerId() {return passengerId;}

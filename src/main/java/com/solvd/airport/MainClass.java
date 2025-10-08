@@ -1,18 +1,18 @@
-package main.java.com.solvd.airport;
+package com.solvd.airport;
 
-import main.java.com.solvd.airport.core.*;
-import main.java.com.solvd.airport.enums.SeatClass;
-import main.java.com.solvd.airport.flight.*;
-import main.java.com.solvd.airport.passenger.*;
-import main.java.com.solvd.airport.service.*;
-import main.java.com.solvd.airport.exceptions.InvalidTicketException;
-import main.java.com.solvd.airport.exceptions.SeatOccupiedRuntimeException;
+import com.solvd.airport.core.*;
+import com.solvd.airport.enums.SeatClass;
+import com.solvd.airport.flight.*;
+import com.solvd.airport.passenger.*;
+import com.solvd.airport.service.*;
+import com.solvd.airport.exceptions.InvalidTicketException;
+import com.solvd.airport.exceptions.SeatOccupiedRuntimeException;
 
-import main.java.com.solvd.airport.utils.AirportFunctional;
-import main.java.com.solvd.airport.enums.*;
-import main.java.com.solvd.airport.lambda.FareCalculator;
-import main.java.com.solvd.airport.lambda.FlightAlert;
-import main.java.com.solvd.airport.lambda.SeatSelector;
+import com.solvd.airport.utils.AirportFunctional;
+import com.solvd.airport.enums.*;
+import com.solvd.airport.lambda.FareCalculator;
+import com.solvd.airport.lambda.FlightAlert;
+import com.solvd.airport.lambda.SeatSelector;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,8 +21,13 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class MainClass {
+
+    private static final Logger logger = LogManager.getLogger(MainClass.class);
 
     public static void main(String[] args) {
 
@@ -43,7 +48,7 @@ public class MainClass {
 
         List<Person> people = Arrays.asList(memberPassenger, regularPassenger, pilot);
         for (Person person : people) {
-            System.out.println("- " + person.toString());
+            logger.info("- " + person.toString());
         }
 
         Airplane airplane1 = new Airplane("Galactic Motors", 223);
@@ -56,13 +61,13 @@ public class MainClass {
 //            System.out.println(transport.toString() + ", ");
 //        }
 
-        System.out.println("-------------");
+        logger.info("-------------");
         Airport airport = new Airport("Tatooine airport");
 //        System.out.println(airport.getAirportName());
 
         airport.setTransports(transports);
         for (Transport t : airport.getTransports()) {
-            System.out.println("- Transport" + t);
+            logger.info("- Transport" + t);
         }
 
         Terminal t1 = new Terminal("T1", 111, 13);
@@ -78,9 +83,9 @@ public class MainClass {
             terminalMap.put(t.getTerminalNumber(), t);
         }
 
-        System.out.println("-------------");
+        logger.info("-------------");
         for (Map.Entry<Integer, Terminal> entry : terminalMap.entrySet()) {
-            System.out.println("- Terminal Number: " + entry.getKey() + " - " + entry.getValue());
+            logger.info("- Terminal Number: " + entry.getKey() + " - " + entry.getValue());
         }
 
 //        Gate gate1 = new Gate(19);
@@ -109,7 +114,7 @@ public class MainClass {
 
         Ticket ticket1 = bookingService.BookTkt(memberPassenger, flight, seat2);
         if (ticket1 != null) {
-            System.out.println("Created ticket: " + ticket1.getTktNumber() +
+            logger.info("Created ticket: " + ticket1.getTktNumber() +
                     ", seat: " + ticket1.getSeat().getSeatNumber() +
                     ", price: " + ticket1.getTktPrice());
         }
@@ -118,19 +123,19 @@ public class MainClass {
         try {
             ticket2 = bookingService.BookTkt(regularPassenger, flight, seat2);
         } catch (SeatOccupiedRuntimeException e) {
-            System.out.println("Error booking seat: " + e.getMessage());
+            logger.error("Error booking seat: " + e.getMessage());
         } finally {
-            System.out.println("Finished booking for seat " + seat2.getSeatNumber());
+            logger.info("Finished booking for seat " + seat2.getSeatNumber());
         }
 //        System.out.println("booking for occupied seat: " + ticket2);
 
-        System.out.println("Total bookings: " + Booking.getBookings());
-        System.out.println("-----------------------");
+        logger.info("Total bookings: " + Booking.getBookings());
+        logger.info("-----------------------");
 
         try (ServiceSession session = new ServiceSession()) {
             airport.getCheckInService().checkIn(ticket1);
         } catch (InvalidTicketException e) {
-            System.out.println("Check in failed: " + e.getMessage());
+            logger.error("Check in failed: " + e.getMessage());
         }
         airport.getBoardingService().boardPassenger(ticket1);
         airport.getFlightManagementService().delayFlight(flight, 15);
@@ -140,15 +145,15 @@ public class MainClass {
         desk.assistCheckIn(bookingService, ticket1);
 
 
-        System.out.println("----------H6--------------");
+        logger.info("----------H6--------------");
         List<Seat> seats = new ArrayList<>(Arrays.asList(seat1, seat2, seat3, seat4));
         Predicate<Seat> freeSeat = s -> !s.isOccupied();
         Function<Passenger, BigDecimal> discount = p -> p.hasDiscount() ? new java.math.BigDecimal("10.13") : java.math.BigDecimal.ZERO;
         Supplier<SeatClass> seatClassSupplier = () -> SeatClass.BUSINESS;
-        Consumer<AirportFunctional.PriceBreakdown> logger = b -> System.out.println(b);
+        Consumer<AirportFunctional.PriceBreakdown> breakdownLogger = b -> logger.info(b.toString());
         FareCalculator fareCalculator = (baseFare, passenger, seatClass) -> seatClass.applyTo(baseFare);
         SeatSelector seatSelector = (list, filter) -> list.stream().filter(filter).findFirst().orElse(null);
-        FlightAlert notifier = (passenger, flight1, msg) -> System.out.println("Notifying " + passenger.getFirstName() + " messgae: " + msg + " " + FlightStatus.SCHEDULED.getDescription());
+        FlightAlert notifier = (passenger, flight1, msg) -> logger.info("Notifying " + passenger.getFirstName() + " message: " + msg + " " + FlightStatus.SCHEDULED.getDescription());
 
         AirportFunctional.PriceBreakdown breakdown = AirportFunctional.processBooking(
                 memberPassenger,
@@ -158,7 +163,7 @@ public class MainClass {
 
                 freeSeat,
                 discount,
-                logger,
+                breakdownLogger,
                 seatClassSupplier,
 
                 fareCalculator,
@@ -166,28 +171,28 @@ public class MainClass {
                 seatSelector
         );
 
-        System.out.println("Get Final Pric: " + breakdown.getFinalPrice());
+        logger.info("Get Final Price: " + breakdown.getFinalPrice());
 
 
-        System.out.println("----------H7--------------");
+        logger.info("----------H7--------------");
 
         Map<Boolean, List<Seat>> seatsByStatus = seats.stream()
                 .collect(Collectors.groupingBy(Seat::isOccupied));
-        System.out.println("Occupied seats are: " + seatsByStatus.keySet().size());
+        logger.info("Occupied seats are: " + seatsByStatus.keySet().size());
 
         OptionalDouble avgPrice = seats.stream()
                 .mapToDouble(seat -> seat.getPrice().doubleValue())
                 .average();
-        System.out.println("Average seat price is: " + avgPrice);
+        logger.info("Average seat price is: " + avgPrice);
 
         List<String> passengerNames = people.stream()
                 .filter(person -> person instanceof Passenger)
                 .map(person -> person.getFirstName() + " " + person.getLastName())
                 .sorted().toList();
-        System.out.println("Sorted main.java.com.solvd.airport.passenger names are: " + passengerNames);
+        logger.info("Sorted passenger names are: " + passengerNames);
 
         boolean hasLargeTransport = transports.stream()
                 .anyMatch(transport -> transport.getCapacity() > 400);
-        System.out.println("Transport with more than 400 capacity exists: " + hasLargeTransport);
+        logger.info("Transport with more than 400 capacity exists: " + hasLargeTransport);
     }
 }
