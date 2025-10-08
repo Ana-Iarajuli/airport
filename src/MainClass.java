@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 
 public class MainClass {
@@ -164,5 +165,27 @@ public class MainClass {
         );
 
         System.out.println("Get Final Pric: " + breakdown.getFinalPrice());
+
+
+        System.out.println("----------H7--------------");
+
+        Map<Boolean, List<Seat>> seatsByStatus = seats.stream()
+                .collect(Collectors.groupingBy(Seat::isOccupied));
+        System.out.println("Occupied seats are: " + seatsByStatus.keySet().size());
+
+        OptionalDouble avgPrice = seats.stream()
+                .mapToDouble(seat -> seat.getPrice().doubleValue())
+                .average();
+        System.out.println("Average seat price is: " + avgPrice);
+
+        List<String> passengerNames = people.stream()
+                .filter(person -> person instanceof Passenger)
+                .map(person -> person.getFirstName() + " " + person.getLastName())
+                .sorted().toList();
+        System.out.println("Sorted passenger names are: " + passengerNames);
+
+        boolean hasLargeTransport = transports.stream()
+                .anyMatch(transport -> transport.getCapacity() > 400);
+        System.out.println("Transport with more than 400 capacity exists: " + hasLargeTransport);
     }
 }
