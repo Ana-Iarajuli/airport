@@ -1,0 +1,374 @@
+1. Introduction
+In order for airports to be successful in today’s competitive air transportation market, airport owners and opera-
+tors need to align their management information systems to optimize operations, improve product distributions,
+improve customer relations, reduce overhead, and increase revenues [4]. A proper classification is a prerequisite
+to systems alignment.
+Research on the intersection of the areas of aviation and management of information systems is scarce. The
+How to cite this paper: Marks, A. and Rietsema, K. (2014) Airport Information Systems—Airside Management Information
+Systems. Intelligent Information Management, 6, 149-156. http://dx.doi.org/10.4236/iim.2014.63016
+A. Marks, K. Rietsema
+purpose of this paper is to contribute to the body of knowledge by providing descriptions of airport management
+information systems, their interoperability with other systems, and the key uses and users of each system. There
+are many types of management information systems and they can be organized or classified in a number of dif-
+ferent ways [1] [2]. Furthermore, each system may or may not be necessary for a particular airport depending on
+the business goals and objectives and the certificate which the airport is operating under. Consequently, the sys-
+tem classification schema presented in this paper is neither all-inclusive nor exclusive; however, a number of
+leading aviation practitioners, business professionals, and educators in the industry were instrumental in both
+proposing and validating the schema. The study used interviews, documentation, and observation as the primary
+sources of data. This paper is concerned with key Airside Management Information Systems.
+Airside Management Information Systems facilitate the airport and airline operations required to process air-
+craft, passengers, and air cargo. They involve the ticketing of air travelers, ground movement of aircraft and ve-
+hicles, flight procedures of aircraft within airport airspace, and scheduling and managing of boarding and gate
+equipment, and weather updates.
+The airside management information systems covered in this paper are: Gate Management System, Aircraft
+Fuelling System, Air Traffic Control (ATC) System, Weather Monitoring System, Airfield Lighting System, and
+Automatic Vehicle Identification (AVI) System [1].
+2. Methodology
+This study uses naturalistic inquiry to elicit data related to the classification and use of Airside Management In-
+formation Systems. The qualitative study collected data using observations, interviews, and document analysis
+in order to answer the research questions. Twenty-one extensive interviews were conducted with senior airport
+officials and IT directors from four US international airports and aviation faculty in Embry-Riddle Aeronautical
+University. A systematic search for the entire data corpus was conducted and data categories were created. Con-
+stant comparative method of data analysis was used (Merriam, 2001). The constant comparative method is a
+technique often used in the grounded theory tradition of qualitative research. It involves systematic search and
+arrangement of field notes and other data accumulated into categories in order to increase the understanding of
+the situation. In reviewing the field notes, the researcher generated and tested assertions by looking for key lin-
+kages and conducting member checks.
+3. Gate Management System
+The Gate Management System encompasses the management of airport terminal and ramp equipment and sys-
+tems, including the efficient scheduling of gates for parking arriving aircraft and controlling terminal and ramp
+display equipment for directions and information. The Gate Management System employs software programs
+designed to facilitate the management of airport flight and gate operations. This system is capable of controlling
+all aspects of ticketing and boarding operations and of displaying information on the Check-In Desk Dynamic
+Display System (CDDDS) at ticket counter check-in areas. The Gate Management System controls the schedul-
+ing and allocation of resources. An airport provides airline tenants with passenger ticketing lobby spaces,
+boarding gates, baggage claim belts, and aircraft parking spaces. However, the equipment and amount space al-
+located to an airline is determined by its tenant lease agreement with the airport.
+Airlines use flight scheduling software such Gate Keeper® or Sabre® to schedule all of their flights, and the
+Gate Management System uses the airlines’ flight schedules to create the schedules sent to the airport’s com-
+mon-use equipment. Data from the scheduling software are imported into the Gate Management System to allow
+the matching of scheduled flights with airport gates and flight-processing systems [3]. In an exclusive-use ar-
+rangement, an airline’s flight scheduling system schedules all aspects of each flight, including the equipment,
+boarding gates, and baggage claim belts. Under common-use agreements, the Gate Management System rece-
+ives flight schedules for each airline and schedules the common-use equipment needed to support each flight.
+The system uses predefined airport operational rules (e.g., number of gates to schedule at a concourse based on
+the types and size of aircraft) to determine the optimal allocation of boarding gates and the aircraft ramp parking
+areas.
+The Gate Management System calculates gate capacity and determines when aircraft can be scheduled and
+assigned to gates based on projected airline traffic. The system is also used for scheduling gate usage based on
+aircraft type, specifically size and category, to ensure compatibility. Data feeds from other aviation information
+150
+A. Marks, K. Rietsema
+systems, such as the Flight Information Display System (FIDS), and Federal Aviation Administration (FAA)
+flight databases ensure up-to-the-minute flight status on arriving aircraft. If properly configured, the Gate Man-
+agement System reduces operational costs and improves efficiency by automating the scheduling of airport
+equipment. Gate Management Systems can also generate historical reports for equipment-usage for each asset
+programmed into the system allowing efficient use of airport resources. Gate Management Systems require
+computer applications, either as complete software suites or as individual applications or modules incorporated
+into other airside operations management software. For instance, software modules may include the following:
+Boarding and ramp gate resource scheduling modules, baggage belt systems resource scheduling, and com-
+mon-use ticketing equipment.
+The Gate Management System has a Graphical User Interface (GUI) that allows key users to manually input
+rules (i.e., conditions for use of equipment) and flight schedules to adjust equipment usages. The GUI allows the
+system operator to see all of the flight data imported into the system and the equipment that has been allocated
+for each flight. Conflicts in equipment scheduling are displayed, so system operators can make appropriate ad-
+justments rapidly. Each airline provides a data feed into the Gate Management System that consists of their
+flight schedule up to 30 days in advance. However, the gate management software also allows users to import
+flight schedules manually for airlines with unscheduled flight services at the airport. An operator simply logs
+into the Gate Management System and chooses from several integrated functions such as configuration man-
+agement, scheduling, gate management, ticket-counter management, and baggage-claim carousel management.
+Users monitoring the Gate Management System are able to track daily operations in these areas to ensure each
+area continues to operate efficiently and without conflicts. Because specialized equipment is not required, the
+Gate Management System can run on the airport’s existing IT network. The system connects via a Local Area
+Network (LAN) or via a Wireless LANS (WLANS) to other airport systems such as CUPPS, MUFIDS, and
+BIDS to provide information and allow for scheduling of airport resources. The Gate Management System typi-
+cally stores predefined processes (instructions) and airport asset information in a Relational Database Manage-
+ment System (RDBMS). These data provide the basis for the instructions generated for scheduling airport
+equipment based on airline flight information. Airline flight schedules stored in an airline database are imported
+into the gate management application for short-term storage of flight data. Because the gate management appli-
+cation does not change airline flight schedules, it is not necessary to maintain long-term storage of any flight
+data in the database. Some examples of gate management software provided by outside contractors include:
+Smart Airport Operations Center (Ascent Technology), Rapid Gate (Inter Systems): and TMS-Gate (Jeppesen).
+4. Aircraft Fueling System
+The Aircraft Fuelling System encompasses the coordination of efficient delivery scheduling, distribution, and
+monitoring of fuel stored at airport fuel farms and delivered to aircraft and operations vehicles; thus, optimizing
+aviation fuel purchasing and billing. The Aircraft Fuelling System includes the airport’s fuel farm stations where
+the large-capacity storage tanks are located. A major commercial airport usually has several fuel farms. Al-
+though they are situated on airport property, they may be managed and operated by the airlines or by third par-
+ties.
+Regardless of the number of fuel farms or who manages them, a control system is required to both manage
+and monitor fuel-farm operations. Most large airports have an underground fuel supply system consisting of
+network control and monitoring systems connected to fuel lines running underground from the fuel farm to air-
+craft gate areas on the parking ramp, which could be some distance apart. Fuel is pumped to aircraft through
+hoses connected to the underground fuel hydrant system. A computer system regulates the precise movement of
+fuel from the fuel farms based on input received from several sources including the host application, fuel-flow
+devices, and status monitoring devices. Typically, fuel-flow devices have a mobile computer that regulates the
+amount of fuel supplied to an aircraft based on pre-programmed parameters used in calculating the correct fuel
+load requirements for the aircraft type and the upcoming flight route. Before an airplane is refueled, the fuelling
+operator logs into the airport’s fuel information system on a mobile terminal connected to the host system and
+downloads the fuel configuration for the aircraft. Then as the operator refuels the airplane, the device tracks the
+quantity of fuel pumped to the airplane and sends that data back to the host fuel system via wireless transmission.
+Safe and efficient operations of a fuel farm require strict management from the time a pipeline or fueling tanker
+delivers the fuel to the storage tanks to the time an aircraft receives the fuel at a gate. These systems provide
+151
+A. Marks, K. Rietsema
+services such as real-time inventory reports needed to track daily usage by individual airlines as well as the con-
+tinuous monitoring of offloading and storing processes necessary to prevent tank overfills and fuel spills. Fuel
+information systems can perform simple sensor monitoring of inventory levels in addition to more complex op-
+erations that integrate various supply chain partners. Integrated systems handle automated ordering based on in-
+ventory levels to ensure the storage tanks always have enough fuel for regular and contingency operations and to
+ensure optimal supplies from tanker truck or pipeline deliveries. These integrated information systems also
+maintain optimal efficiency through tank-level monitoring and pressure-flow monitoring. They also allow fuel
+farm operators to detect leaks in the systems, flow pressure issues, and other events that could lead to potential
+unsafe conditions or hazards during fueling operations. The Aircraft Fuel System provides the opportunity to
+optimize fuel costs by identifying trends in utilization and performance. Reporting systems provide information
+used to improve decision making in all fueling operations and in allocation of labor and equipment resources.
+This adds value to the airport and airlines by enabling safe and efficient fueling operations and effective
+supply-chain management processes. Billing for the fuel purchased by each airline is administered through the
+airport’s Revenue Management System. These reports enable accurate and timely billing for efficient revenue
+management. Airport operators may also use the system to analyze fuel costs and supply quantities to optimize
+purchasing fuel during low cost periods; thus, increasing revenue. Fuel systems utilize either standalone soft-
+ware or separate applications or modules integrated into the airport’s operational software suite or integrated
+with financial and other asset management software. Software applications can vary by vendor and the type of
+system installed. For example, an application like COSTAS AFMS by Mess—und Fördertechnik Gwinner al-
+lows users to configure the system based on the equipment and parameters established by the fuel system ad-
+ministrator. These parameters monitor fuel levels, detect fuel leaks in the system, and monitoring the status of
+other equipment connected to the system. The database connected to the fueling system stores data generated
+from all of the connected devices, and user-input information on fueling equipment, supply tank capacities, au-
+thorized system users, supply chain vendors, and rules for system operation.
+5. Air Traffic Control System
+The Air Traffic Control (ATC) System encompasses the FAA personnel and equipment used to manage and
+coordinate the safe and efficient movement of all (a) aircraft in controlled airspace, (b) aircraft and vehicles on
+airport runways and taxiways, and (c) aircraft operations and maintenance operations in airport movement areas.
+The primary purpose of the ATC System is to maintain safe separation of air traffic and to manage the safe and
+efficient movement of aircraft and vehicle traffic in aircraft movement areas to prevent runway and taxiway in-
+cursions. This system is comprised of Very-High Frequency [VHF] radio systems, computer radar systems
+(Surface Movement Radar [SMR]), navigational equipment, ATC facilities, and ATC personnel. Each compo-
+nent plays an important role in enhancing air travel safety [5]. However, the relationships between ATC and the
+airports that depend on it are complicated because both are responsible for providing a safe operating environ-
+ment for aircraft and airport personnel.
+Some of the ATC System technologies include, but are not limited to, the following: Airport Surface Detec-
+tion Equipment (ASDE): This surveillance system is comprised of radar and satellite technology that enables air
+traffic controllers to track the surface movement of aircraft and ground vehicles; Radar Data Processing & Dis-
+play System (RDPDS): This system processes radar data received from various primary and secondary radars to
+present the aircraft position and relevant information (e.g., aircraft call sign, altitude, ground speed, aircraft cat-
+egory) on the radar display. Air traffic controllers use this information to control approach, departure, terminal,
+and enroute air traffic; Flight Data Processing System (FDPS): This system processes flight-plan data from
+aeronautical messages and it automatically prints the flight progress strips for use by air traffic controllers to as-
+sist in updating and monitoring of the aircraft flight profile: the estimated departure time, flight route, flight lev-
+el, expected times at reporting points, cruising speed, and estimated arrival time; Surface Movement Radar
+(SMR): This radar is mounted on top of the control tower to provide surveillance of the movement of aircraft
+and vehicles on the airport runways and taxiways. It provides accurate movement information, enabling tower
+controllers to maintain a smooth flow of traffic during low visibility or darkness; Instrument Landing System
+(ILS): This system provides precision landing aids for accurate azimuth and descent guidance signals used by
+aircraft for landing under both normal and adverse weather conditions; Precision Runway Monitor (PRM): This
+is a Monopulse Secondary Surveillance Radar (MSSR) that has electronically-scanned antennas configured in a
+152
+A. Marks, K. Rietsema
+circular array. The PRM system can search, track, process, and display MSSR-equipped aircraft within airport
+airspace within 32 nautical miles in range and within 15,000 feet in elevation from the airport runways.
+These technologically advanced equipment systems are used by ATC, airlines, and airports to aid the safe
+movement of aircraft, so they must be of the highest accuracy and reliability.
+Airports and airlines also depend on ATC equipment for real-time flight status of aircraft and current weather
+conditions. The FAA weather monitoring systems installed throughout the U.S. provide advanced warning to
+ATC, so pilots can receive early notification of inclement weather and change flight plans as dictated by safety.
+This weather information is shared with airport operators so they can implement procedures for irregular opera-
+tions before inclement weather impacts the airport. Airport operators are also required to implement and main-
+tain a Notice to Airman Systems (NOTAMS) to inform ATC controllers and aircraft pilots of changes in condi-
+tions on airport runways and taxiway systems. Weather notifications may be manual or automated. Manually
+transmitted information is faxed to ATC and airline operational centers. Key users can opt to have this informa-
+tion automatically emailed to them or imported into the ATC System and each airline’s system of choice.
+The ATC System utilizes computer-based systems to provide information to ATC controllers and to the sys-
+tems providing operational guidance for ATC and aircraft pilots. Data generated by the ATC System facilitates
+separation of aircraft, efficient flow of air traffic in ATC-controlled space, and coordination of ground move-
+ments of aircraft and vehicles. The FAA also provides data feeds for airports, airlines, and the companies that
+produce aviation-related software integrated into airport and airline systems. Data generated by the ATC System
+allows airports to plan and prepare for irregular operations, such as forecasted snow events or thunderstorms,
+that might require aircraft to divert to alternate airports, resulting in unscheduled aircraft arrivals. Planning,
+preparation, and coordination with the ATC System help improve overall airport operations. Weather informa-
+tion systems used by ATC provide real-time weather status through commercial-off-the-shelf (COTS) applica-
+tions such as AWOS or through customized applications such as National Airspace System (NAS) Status. Other
+software applications provide aircraft tracking, control of navigational equipment, and surface detection systems.
+The hardware equipment utilized in the ATC System is specific to each component system and its intended ap-
+plication. Each connected system uses specialized field and computer hardware for data reporting. Airports are
+not permitted direct access or input to this computer hardware. Specifics on ATC hardware and networks are not
+made public. The ATC System operates on FAA networks that are not connected to any airport network. Data
+generated by FAA systems are, however, available to airports via connections to open databases set up by the
+FAA for airports, airlines, and vendors providing or requiring access to the FAA flight-scheduling systems. Ap-
+plications such as Aero Bahn and Flight Explorer import ATC data to track aircraft ground movements and air-
+craft flight progress from take-off (departures) to landing (arrivals). The FAA databases store flight schedules,
+actual take-off and landing times, aircraft type, the names of and information on airlines, airports, airport confi-
+gurations, airfield configurations (i.e., number and names of all runways and taxiways), airfield lighting specifi-
+cations, and other flight related data. Any airport operator can request FAA data feeds to supply relevant infor-
+mation to their MUFIDS, BIDS, and the Gate Management System.
+6. Weather Monitoring Systems
+The Weather Monitoring System consists of a combination of computer-based systems and weather equipment,
+such as weather antennas and sensors, that provide current and forecasted weather conditions for the airport vi-
+cinity and ground and surface temperatures for the aircraft movement areas, public roadways, and bridges. Con-
+tinuous weather monitoring is important for all operations at every airport in the National Airspace System
+(NAS). Weather conditions affect aircraft departures, enroute travel, and landing operations as well as airport
+terminal facility operations. Inclement weather that grounds or cancels flights, causes delays in traffic on airport
+roadways; increases the number of passengers in terminal buildings and concourses, which in turn increases
+demand on facilities, restaurants, and stores; increases use of airport systems such as heating and air ventilation
+systems; and increases demand on human resources to ensure passengers are being serviced and the airport is
+being maintained properly. Therefore, having advance notification of when inclement weather systems should
+help optimize airport operations, allowing airport operators to ensure resources, procedures, and processes are in
+place ahead of time [2].
+Airport Weather Monitoring Systems include a variety of equipment for monitoring weather and airport sur-
+face temperatures. Snow and de-ice operations require constant monitoring and measurement of surface temper-
+153
+A. Marks, K. Rietsema
+atures and precipitation accumulation rates. Airports use a combination of digital temperature measuring devices
+and skid calibration vehicles to determine when runways and taxiways need to have chemicals added for reduc-
+ing or removing snow and ice from the areas where aircraft and service vehicles travel. Data generated by these
+devices allow airports to develop priorities for cleaning runways and taxiways to enable aircraft operations to
+continue as scheduled. Any one of several systems can provide real-time weather data to airports. Data feeds
+from Internet sources such as NOAA, the Weather Channel®, and Weather Bug® all report weather information.
+An airport may also integrate the computer code (e.g., markup language or HTML) or RSS feeds from diverse
+sources such as Yahoo® and NOAA to provide weather updates and forecasts on the airport website. Most often,
+weather feeds are free for airports to deploy, because advertising revenues subsidize the cost of hosting the web-
+site.
+A second option available to airports is the purchase of weather software systems that can be maintained by
+the airport operator. These types of systems include the purchase and installation of hardware systems that mon-
+itor and detect current weather and predict changes in weather patterns. Systems such as Automate Weather
+Observation Systems (AWOS) provide accurate real-time weather information. The hardware includes towers
+with sensors that monitor temperature, wind speed, precipitation accumulation, and barometric pressure.
+High-end systems, such as AWOS, also include features that allow for the transmission of weather information
+to airport computer systems, airport UHF and VHF radio systems, and the NOTAM service. Advanced systems
+also collect and report the following data: Wind direction, Visibility, Runway Visual Range (RVR) Conditions,
+ATC conditions, Density altitude, Air temperature, Dew point temperature, cloud height and sky cover including
+obscuration.
+A third option is obtaining certified weather reports from the FAA or the airlines. This option is popular with
+airports because the accuracy of current weather data and forecasts is very reliable. Weather data are vital to the
+safety of daily airport and airline operations. A Weather Monitoring System improves safety by allowing airport
+and airline personnel to prepare airside and landside equipment, employees, and facilities for inclement weather
+operations. Deviations in scheduled flights incur additional costs to airlines for the extra fuel used for late arriv-
+als and departures. Schedule deviations affect airlines and the airport facilities, gates, and systems used to ser-
+vice flights. Therefore, early notifications of incoming inclement weather can reduce the potential impacts on
+airport operations; thus, reducing airline and airport operating costs. Weather information may be displayed on
+dynamic signs in retail areas, airport transportation systems, parking lots, cell-phone parking lots, and other
+areas frequented by employees or customers. Airport and airline employees use the Weather Monitoring System
+to prepare equipment and facilities for anticipated weather to maintain the safety of employees, passengers, and
+visitors. Airport weather-reporting systems include RSS feeds, websites, AWOS, coordinated airline and FAA
+systems, and airport equipment. As previously mentioned, weather data may also originate from any number of
+Internet websites including Yahoo®, Google®, MSN®, or other Internet websites. Airports can also download
+and install apps from vendors such as Weather Bug or the Weather Channel to display information on their web-
+sites and display systems. If the airport owns and operates its Weather Monitoring System, application software
+provided by the vendor will have a GUI installed with custom configurations (settings) for the airport. Once in-
+stalled, this type of system allows key users to track weather activity and to see the direction and speed of in-
+coming inclement weather. Other software systems such as Vaisala AviMet® Aviation Weather provide modular
+applications that allow airport users to define the perimeters for status monitoring.
+7. Airfield Lighting Systems
+The Airfield Lighting System encompasses the lights installed on airport taxiways, runways, and some ramp
+areas that provide location and direction information to aircraft pilots, maintenance workers, aircraft mechanics,
+and FAA control-tower personnel during times of reduced visibility to facilitate safe operations. Airports also
+have navigation lighting systems that the FAA both maintains and operates. These systems include approach
+lighting systems and beacon lights that aid aircraft movement, but are not covered in this book.
+Most commercial airports operate 365 days a year under virtually all weather conditions. Normal daylight
+conditions are increasingly requiring additional lighting for aircraft taxi, take-off and landing operations. Addi-
+tional lighting is required for aircraft operations during hours of reduced visibility (i.e., dusk to dawn) and dur-
+ing other conditions that reduce the visibly at the airport (e.g., fog, rain, snow, smog). Airports certified and op-
+erating under Federal Aviation Regulation (FAR) Part 139 are required to have Airfield Lighting Systems to aid
+154
+A. Marks, K. Rietsema
+in the safe movement of aircraft and support vehicles. These airports service scheduled air carrier operations,
+aircraft certificated to transport between 9 to 31 passengers. The FAA establishes the standards and guidance for
+airport lighting systems in Advisory Circulars (ACs). Advisory circulars provide detailed instructions for the de-
+sign, installation, and maintenance of airport lighting systems. For example, AC-150/5345-43G: Specification
+for Obstruction Lighting Equipment provides the specifications mandated for lights on runways and taxiways
+including the colors and materials of the lights and their housings.
+The Airfield Lighting System includes lights, connectors, cabling, sensors, and computer hardware, and soft-
+ware. The number of lights in an Airfield Lighting System can range from a few hundred to a few thousand de-
+pending on the size of the airport and the number and length of the runways and taxiways. These lights are con-
+trolled by a computer system programmed to auto adjust the lighting levels based operational requirements and
+detected weather and visibility conditions. Also, FAA tower controllers and airport maintenance personnel can
+manually control airfield lighting as needed. Airfield Lighting System includes electrical systems controlled by
+control and monitoring computer software. Although the software applications differ somewhat by vendor, they
+perform the same function of controlling light levels on the airport’s airfield. Most software applications come
+with a GUI that enables touch-control operation of the system. For example, systems such as ALCMS (ADB) or
+DCCMS (Crouse Hinds) allow operators to control individual areas of the airfield as well as all areas of the air-
+field through use of a touch screen monitor that displays a map of the airfield. This type of software system also
+provides visual notifications of individual or multiple light outages and can send notifications automatically
+whenever conditions change within the system. These software applications can also be integrated with the air-
+port’s maintenance reporting system to automate service maintenance requests. The database stores information
+on the connected equipment and on the configuration settings for different weather and visibility conditions.
+Users have the option of storing information on the manufacturer’s in-house database or on their SQL, Oracle,
+or ODBC database integrated into the airport lighting software application. The database stores and displays re-
+levant information on the types of lights, runways, and taxiways, power distribution tables, cabling distribution
+tables, computer workstation configurations, and authorized users. Typically, an airport Airfield Lighting Sys-
+tem is proprietary.
+8. Automatic Vehicle Identification Systems (AVI)
+The Automatic Vehicle Identification (AVI) System encompasses the special Radio Frequency Identification
+(RFID) hardware installed in vehicles and the computers operating data collection and system management
+software used for identifying, tracking, and recording vehicle movements at an airport. The AVI system utilizes
+RFID-based equipment to track resources to both monitor and control restricted access points. The AVI system
+monitors, identifies, and collects information on the overall movement of airport ground traffic as well as the
+position and movement of individual vehicles.
+Efficient use of resources is a major factor in an airport’s operating at peak efficiency. Airport operators and
+managers are becoming more aggressive in tracking resource usages to ensure airport equipment is used for its
+intended purpose and is used within the manufacturer’s standard operating procedures (SOP) and airport guide-
+lines. Furthermore, workers are incentivized to operate within these parameters by knowing operations managers
+can see the present and past locations of vehicles installed with RFID tags being monitored by the AVI system.
+Airports may also use RF tags in emergency-response vehicles required to access runways and taxiways. Moni-
+toring vehicles in proximity to restricted areas such as runways and taxiways helps to prevent incursions in re-
+stricted access areas where aircraft are taking off or landing. When the AVI System is used in this capacity, op-
+erations personnel are immediately alerted of an intrusion or unauthorized breach, which allows for intervention
+before an aircraft incursion, occurs.
+The AVI System can be used to track the movement of delivery and service personnel who are required to
+transit airport service roads, although most airports require authorized escorts for these types of service visits. If
+the airport has an AVI system, an RF transponder can be assigned to the service vehicle’s driver, so the vehicle’s
+movements can be automatically tracked from the airport access point, throughout a designated route to the ser-
+vice location, and then on the exit route. Individuals monitoring the vehicle are immediately alerted to any devi-
+ations from the assigned route; thus, allowing immediate intervention should the need arise. This practice allows
+for the supervised movement of vehicles without the need for escorts; thus, freeing up valuable airport and air-
+line resources. Emergency-response vehicles such as Aircraft Rescue and Firefighting (ARF) trucks, police cars,
+155
+A. Marks, K. Rietsema
+and other first-responder units must arrive on scene within a very short time from the time of the incident notifi-
+cation. The AVI equipment installed in the emergency vehicles improves response times by informing incident
+commanders and first responders of the fastest routes to the scene.
+On the airport landside, the AVI System assists the management of the commercial ground transportation
+system. Operators of commercial vehicles such as taxis, limousines, and shuttle buses pay fees to integrate
+within the airport’s commercial ground transportation system. Permitting commercial transportation companies
+to conduct revenue-generating business at the airport satisfies a valuable need for airport customers. However,
+the management of these vehicles, especially at large airports, can be quite labor-intensive because the airport
+must account for each vehicle every time it accesses airport property, which is many times a day. Vehicle track-
+ing data are needed because fee rates are tiered to usage rates, and this commercial fee information is needed in
+projecting airport revenue. Companies approved to conduct commercial ground transportation services are is-
+sued RF transponders that provide access to the commercial vehicle area and that track the number of commer-
+cial visits per vehicle. Based on the particular licensing agreement with the airport, commercial operators pay a
+monthly charge upfront or they are billed at the end of the month based on the number of times the vehicle(s)
+accessed the commercial area. Processing commercial invoices and collecting fees is automated when the AVI
+system is integrated with the airport Revenue Management System. The AVI System provides several benefits
+besides improving roadway congestion and providing monitoring of airport resources without the need for hu-
+man intervention. The system brings real-time vehicle movement data and decision makers together by reporting
+transactions to multiple systems and their managers. For example, integration with the airport Revenue Man-
+agement System allows AVI data to be used for budget planning and airport roadway improvement projects. In-
+deed, the AVI data can be fed into maintenance systems, operational systems, airfield-monitoring systems, ve-
+hicle access systems, and revenue tracking and generating systems. AVIs require software to both track AVI
+tags and RFID tags installed or carried in vehicles and to control entry gates for restricted areas. The software
+can be integrated into Asset Management System, parking control system, and Revenue Management System.
+Hardware for the AVI system includes a combination of RF tags (transponders) installed in vehicles for the
+purpose of tracking the vehicle’s movement and authorizing automated access to areas monitored by AVI
+transponders, track readers, long-range RFID readers, and heavy-duty RFID readers. The system includes com-
+puter servers and workstations for hosting the application and providing multiple user access at workstations
+throughout the airport. The AVI System communicates via the airport’s LANS and WLANS to monitor and
+track the RF tags installed in vehicles moving around the airport. The AVI database collects and stores informa-
+tion received from the transponders and from the software application. Data collected by the system includes
+traffic numbers, traffic capacity times, vehicle entry and exit numbers, airfield vehicle access numbers, and the
+locations of RF-tagged vehicles.
+9. Conclusion
+Airports use a myriad of systems to support their operations. Many of those systems are now incorporating
+software, database, and network components. They generate both on-demand and regular reports to assist airport
+management, improve operations and reduce cost at the same time. In order for airports to become more effec-
+tive and efficient in their operations, they need to understand the competitive advantage of these systems and
+how to align them together to better serve their stakeholders. This paper provides a possible classification for
+airport airside management information systems and describes some of their use.
+References
+[1] Marks, A., Rietsema, K. and Hudson, G. (2013) Aviation Management Information Systems. Embry-Riddle Press.
+[2] Airport Cooperative Reseach Program (2008) Integrative Airport Information Systems—Report 13. Transportation
+Research Board.
+[3] Wensveen, J. (2007) Air Transportation: A Management Perspective. Ashgate.
+[4] Robert, K. (2008) Air Transportation. Kendall Hunt Publishing, 11.
+[5] Center for Air Transportation Systems Research (2009) Introduction to Airports Design and Operations. George Mason
+University.
