@@ -1,10 +1,12 @@
 #IntelliJ IDEA
 out/
-*.class
+*.iml
 .idea/
-
 
 #Log files
 *.log
 logs/
+
+*.class
+target/
 
