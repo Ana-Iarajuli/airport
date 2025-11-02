@@ -8,6 +8,10 @@ import com.solvd.airport.service.*;
 import com.solvd.airport.exceptions.InvalidTicketException;
 import com.solvd.airport.exceptions.SeatOccupiedRuntimeException;
 
+import com.solvd.airport.threads.Account;
+import com.solvd.airport.threads.Connection;
+import com.solvd.airport.threads.ConnectionPool;
+import com.solvd.airport.threads.ConnectionTaskThread;
 import com.solvd.airport.utils.AirportFunctional;
 import com.solvd.airport.enums.*;
 import com.solvd.airport.lambda.FareCalculator;
@@ -18,6 +22,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.*;
 import java.util.stream.*;
 import java.lang.reflect.Constructor;
@@ -35,7 +43,7 @@ public class MainClass {
 
     private static final Logger logger = LogManager.getLogger(MainClass.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         PassengerRecord pr1 = new PassengerRecord(1, "Obi-wan", "Kenobi",
                 "thebest@jedi.com", "male", LocalDate.of(1965, 6, 26), true);
@@ -200,10 +208,10 @@ public class MainClass {
         boolean hasLargeTransport = transports.stream()
                 .anyMatch(transport -> transport.getCapacity() > 400);
         logger.info("Transport with more than 400 capacity exists: " + hasLargeTransport);
-        
+
         try {
             Class<?> passengerClass = Passenger.class;
-            
+
             Field[] fields = passengerClass.getDeclaredFields();
             for (Field field : fields) {
                 logger.info("FieldName: " + field.getName());
@@ -211,58 +219,122 @@ public class MainClass {
                 logger.info("Modifiers: " + Modifier.toString(field.getModifiers()));
                 Info fieldAnnotation = field.getAnnotation(Info.class);
             }
-            
+
             Constructor<?>[] constructors = passengerClass.getDeclaredConstructors();
             for (Constructor<?> constructor : constructors) {
                 logger.info("Constructor Name: " + constructor.getName());
                 logger.info("Constructor Modifiers: " + Modifier.toString(constructor.getModifiers()));
-                
+
                 Class<?>[] parameterTypes = constructor.getParameterTypes();
                 for (int i = 0; i < parameterTypes.length; i++) {
                     logger.info(parameterTypes[i].getSimpleName());
                 }
-                
+
                 Info constructorAnnotation = constructor.getAnnotation(Info.class);
             }
-            
+
             Method[] methods = passengerClass.getDeclaredMethods();
             for (Method method : methods) {
                 logger.info("Method Name: " + method.getName());
                 logger.info("Return Type: " + method.getReturnType().getSimpleName());
                 logger.info("Method Modifiers: " + Modifier.toString(method.getModifiers()));
                 logger.info("Parameter Count: " + method.getParameterCount());
-                
+
                 Class<?>[] parameterTypes = method.getParameterTypes();
                 for (int i = 0; i < parameterTypes.length; i++) {
                     logger.info(parameterTypes[i].getSimpleName());
                 }
-                
+
                 Info methodAnnotation = method.getAnnotation(Info.class);
             }
-            
+
             Constructor<?> constructor = passengerClass.getDeclaredConstructor(
-                int.class, String.class, String.class, String.class, String.class, LocalDate.class, boolean.class
+                    int.class, String.class, String.class, String.class, String.class, LocalDate.class, boolean.class
             );
-            
 
 
             Object reflectedPassenger = constructor.newInstance(
-                999, "Rey", "Skywalker", "rey@skywalker.com", "female", 
-                LocalDate.of(1999, 3, 21), true
+                    999, "Rey", "Skywalker", "rey@skywalker.com", "female",
+                    LocalDate.of(1999, 3, 21), true
             );
             logger.info(reflectedPassenger.toString());
-            
+
             Method getFirstNameMethod = passengerClass.getMethod("getFirstName");
             Object firstName = getFirstNameMethod.invoke(reflectedPassenger);
             logger.info(firstName);
-        
+
             Field premiumField = passengerClass.getDeclaredField("isPremiumMember");
             premiumField.setAccessible(true);
             boolean isPremium = (boolean) premiumField.get(reflectedPassenger);
-            logger.info(isPremium);
-            
+            logger.info("Is Premium member: " + isPremium);
+
         } catch (Exception e) {
             logger.error("Reflection error: " + e.getMessage(), e);
         }
+
+        logger.info("-------------H11--------------");
+
+        ConnectionPool pool = ConnectionPool.getInstance(5);
+
+        Thread thread1 = new Thread(() -> {
+            try {
+                Connection conn = pool.getConnection();
+                conn.create("Thread1Acc", 513);
+                Thread.sleep(1000);
+                pool.releaseConnection(conn);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }, "Thread1");
+
+        Thread thread2 = new Thread(
+                new ConnectionTaskThread(pool, 2), "Thread2"
+        );
+
+        thread1.start();
+        thread2.start();
+        thread1.join();
+        thread2.join();
+        logger.info("Available connections: " + pool.availableConnections());
+
+        Thread[] threads = new Thread[7];
+        for (int i = 0; i < 7; i++) {
+            threads[i] = new Thread(new ConnectionTaskThread(pool, i + 1), "PoolThread" + i);
+            threads[i].start();
+        }
+        logger.info("Available connections: " + pool.availableConnections());
+
+
+        ExecutorService executor = Executors.newFixedThreadPool(7);
+
+        for (int i = 0; i < 7; i++) {
+            executor.submit(new ConnectionTaskThread(pool, i + 100));
+        }
+
+        executor.shutdown();
+        executor.awaitTermination(1, TimeUnit.MINUTES);
+
+        CompletableFuture<Account> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                Connection conn = pool.getConnection();
+                Account account = conn.create("Account1", 113);
+                conn.update(account.getId(), "Account1-updated", 90012);
+                pool.releaseConnection(conn);
+                return account;
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                logger.error("interrupted");
+                return null;
+            }
+        }).thenApply(result -> {
+            logger.info("Result: " + result);
+            return result;
+        });
+
+        future.join();
+
+
+        logger.info("Available connections are: " + pool.availableConnections());
+
     }
 }
