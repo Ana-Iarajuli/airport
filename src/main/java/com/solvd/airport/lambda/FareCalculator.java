@@ -1,7 +1,7 @@
-package main.java.com.solvd.airport.lambda;
+package com.solvd.airport.lambda;
 
-import main.java.com.solvd.airport.enums.SeatClass;
-import main.java.com.solvd.airport.passenger.Passenger;
+import com.solvd.airport.enums.SeatClass;
+import com.solvd.airport.passenger.Passenger;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.utils;
+package com.solvd.airport.utils;
 
 import java.util.*;
 

@@ -1,14 +1,14 @@
-package main.java.com.solvd.airport.service;
+package com.solvd.airport.service;
 
-import main.java.com.solvd.airport.core.Person;
-import main.java.com.solvd.airport.flight.Flight;
-import main.java.com.solvd.airport.flight.Seat;
-import main.java.com.solvd.airport.passenger.Passenger;
-import main.java.com.solvd.airport.passenger.Ticket;
-import main.java.com.solvd.airport.exceptions.InvalidTicketException;
-import main.java.com.solvd.airport.exceptions.SeatOccupiedRuntimeException;
-import main.java.com.solvd.airport.exceptions.InvalidFlightOperationException;
-import main.java.com.solvd.airport.utils.*;
+import com.solvd.airport.flight.Flight;
+import com.solvd.airport.flight.Seat;
+import com.solvd.airport.core.Person;
+import com.solvd.airport.passenger.Passenger;
+import com.solvd.airport.passenger.Ticket;
+import com.solvd.airport.exceptions.InvalidTicketException;
+import com.solvd.airport.exceptions.SeatOccupiedRuntimeException;
+import com.solvd.airport.exceptions.InvalidFlightOperationException;
+import com.solvd.airport.utils.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

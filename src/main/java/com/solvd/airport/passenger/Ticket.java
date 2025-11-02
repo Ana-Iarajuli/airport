@@ -1,7 +1,7 @@
-package main.java.com.solvd.airport.passenger;
+package com.solvd.airport.passenger;
 
-import main.java.com.solvd.airport.flight.Flight;
-import main.java.com.solvd.airport.flight.Seat;
+import com.solvd.airport.flight.Flight;
+import com.solvd.airport.flight.Seat;
 
 import java.math.BigDecimal;
 

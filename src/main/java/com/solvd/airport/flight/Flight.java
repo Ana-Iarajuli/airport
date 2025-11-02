@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.flight;
+package com.solvd.airport.flight;
 
 import java.time.LocalDateTime;
 

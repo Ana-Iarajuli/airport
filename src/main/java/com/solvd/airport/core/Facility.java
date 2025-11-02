@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.core;
+package com.solvd.airport.core;
 
 public class Facility {
 

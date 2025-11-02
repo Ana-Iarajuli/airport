@@ -1,8 +1,9 @@
-package main.java.com.solvd.airport.utils;
+package com.solvd.airport.utils;
 
-import main.java.com.solvd.airport.flight.Seat;
-import main.java.com.solvd.airport.passenger.Passenger;
-import main.java.com.solvd.airport.service.Booking;
+import com.solvd.airport.flight.Seat;
+import com.solvd.airport.passenger.Passenger;
+import com.solvd.airport.service.Booking;
+import com.solvd.airport.utils.AirportFunctional;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -19,7 +20,7 @@ public class ServiceManager<T> {
     private Predicate<Passenger> hasValidCredentials = p -> p.getEmail() != null;
     private Consumer<Booking> bookingNotifier = b -> System.out.println("Booking confirmed");
     private Predicate<Seat> freeSeat = s -> !s.isOccupied();
-    private Consumer<main.java.com.solvd.airport.utils.AirportFunctional.PriceBreakdown> logger = b -> System.out.println("AUDIT: " + b);
+    private Consumer<AirportFunctional.PriceBreakdown> logger = b -> System.out.println("AUDIT: " + b);
 
 
     public ServiceManager() {

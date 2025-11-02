@@ -1,6 +1,6 @@
-package main.java.com.solvd.airport.lambda;
+package com.solvd.airport.lambda;
 
-import main.java.com.solvd.airport.flight.Seat;
+import com.solvd.airport.flight.Seat;
 
 import java.util.List;
 import java.util.function.Predicate;

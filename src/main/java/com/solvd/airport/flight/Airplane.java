@@ -1,7 +1,7 @@
-package main.java.com.solvd.airport.flight;
+package com.solvd.airport.flight;
 
-import main.java.com.solvd.airport.core.Maintainable;
-import main.java.com.solvd.airport.core.Trackable;
+import com.solvd.airport.core.Maintainable;
+import com.solvd.airport.core.Trackable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

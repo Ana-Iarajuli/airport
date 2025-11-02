@@ -1,10 +1,10 @@
-package main.java.com.solvd.airport.utils;
+package com.solvd.airport.utils;
 
-import main.java.com.solvd.airport.enums.*;
-import main.java.com.solvd.airport.flight.Flight;
-import main.java.com.solvd.airport.flight.Seat;
-import main.java.com.solvd.airport.passenger.Passenger;
-import main.java.com.solvd.airport.lambda.*;
+import com.solvd.airport.enums.*;
+import com.solvd.airport.flight.Flight;
+import com.solvd.airport.flight.Seat;
+import com.solvd.airport.passenger.Passenger;
+import com.solvd.airport.lambda.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.service;
+package com.solvd.airport.service;
 
 public class ServiceSession implements AutoCloseable {
 

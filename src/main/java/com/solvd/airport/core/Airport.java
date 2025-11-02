@@ -1,9 +1,9 @@
-package main.java.com.solvd.airport.core;
+package com.solvd.airport.core;
 
-import main.java.com.solvd.airport.flight.Transport;
-import main.java.com.solvd.airport.service.CheckInService;
-import main.java.com.solvd.airport.service.BoardingService;
-import main.java.com.solvd.airport.service.FlightManagementService;
+import com.solvd.airport.flight.Transport;
+import com.solvd.airport.service.CheckInService;
+import com.solvd.airport.service.BoardingService;
+import com.solvd.airport.service.FlightManagementService;
 
 import java.util.ArrayList;
 import java.util.List;

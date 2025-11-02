@@ -1,6 +1,6 @@
-package main.java.com.solvd.airport.service;
+package com.solvd.airport.service;
 
-import main.java.com.solvd.airport.passenger.Ticket;
+import com.solvd.airport.passenger.Ticket;
 
 public interface BoardingService {
 

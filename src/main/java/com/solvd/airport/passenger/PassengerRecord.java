@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.passenger;
+package com.solvd.airport.passenger;
 
 import java.time.LocalDate;
 

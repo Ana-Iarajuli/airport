@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.enums;
+package com.solvd.airport.enums;
 
 public enum FacilityType {
 

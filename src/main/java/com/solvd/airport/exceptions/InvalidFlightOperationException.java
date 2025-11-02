@@ -1,4 +1,4 @@
-package main.java.com.solvd.airport.exceptions;
+package com.solvd.airport.exceptions;
 
 public class InvalidFlightOperationException extends RuntimeException {
 

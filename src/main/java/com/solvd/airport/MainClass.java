@@ -20,9 +20,15 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.InvocationTargetException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.solvd.airport.annotations.Info;
 
 
 public class MainClass {
@@ -194,5 +200,69 @@ public class MainClass {
         boolean hasLargeTransport = transports.stream()
                 .anyMatch(transport -> transport.getCapacity() > 400);
         logger.info("Transport with more than 400 capacity exists: " + hasLargeTransport);
+        
+        try {
+            Class<?> passengerClass = Passenger.class;
+            
+            Field[] fields = passengerClass.getDeclaredFields();
+            for (Field field : fields) {
+                logger.info("FieldName: " + field.getName());
+                logger.info("FieldType: " + field.getType().getSimpleName());
+                logger.info("Modifiers: " + Modifier.toString(field.getModifiers()));
+                Info fieldAnnotation = field.getAnnotation(Info.class);
+            }
+            
+            Constructor<?>[] constructors = passengerClass.getDeclaredConstructors();
+            for (Constructor<?> constructor : constructors) {
+                logger.info("Constructor Name: " + constructor.getName());
+                logger.info("Constructor Modifiers: " + Modifier.toString(constructor.getModifiers()));
+                
+                Class<?>[] parameterTypes = constructor.getParameterTypes();
+                for (int i = 0; i < parameterTypes.length; i++) {
+                    logger.info(parameterTypes[i].getSimpleName());
+                }
+                
+                Info constructorAnnotation = constructor.getAnnotation(Info.class);
+            }
+            
+            Method[] methods = passengerClass.getDeclaredMethods();
+            for (Method method : methods) {
+                logger.info("Method Name: " + method.getName());
+                logger.info("Return Type: " + method.getReturnType().getSimpleName());
+                logger.info("Method Modifiers: " + Modifier.toString(method.getModifiers()));
+                logger.info("Parameter Count: " + method.getParameterCount());
+                
+                Class<?>[] parameterTypes = method.getParameterTypes();
+                for (int i = 0; i < parameterTypes.length; i++) {
+                    logger.info(parameterTypes[i].getSimpleName());
+                }
+                
+                Info methodAnnotation = method.getAnnotation(Info.class);
+            }
+            
+            Constructor<?> constructor = passengerClass.getDeclaredConstructor(
+                int.class, String.class, String.class, String.class, String.class, LocalDate.class, boolean.class
+            );
+            
+
+
+            Object reflectedPassenger = constructor.newInstance(
+                999, "Rey", "Skywalker", "rey@skywalker.com", "female", 
+                LocalDate.of(1999, 3, 21), true
+            );
+            logger.info(reflectedPassenger.toString());
+            
+            Method getFirstNameMethod = passengerClass.getMethod("getFirstName");
+            Object firstName = getFirstNameMethod.invoke(reflectedPassenger);
+            logger.info(firstName);
+        
+            Field premiumField = passengerClass.getDeclaredField("isPremiumMember");
+            premiumField.setAccessible(true);
+            boolean isPremium = (boolean) premiumField.get(reflectedPassenger);
+            logger.info(isPremium);
+            
+        } catch (Exception e) {
+            logger.error("Reflection error: " + e.getMessage(), e);
+        }
     }
 }
